@@ -1,6 +1,8 @@
 # Implementing the fruit fly's similarity hashing
 
-This is an implementation of the random indexing method described by Dasgupta et al (2017) in [A neural algorithm for a fundamental computing problem](http://science.sciencemag.org/content/358/6364/793/tab-figures-data).
+This is an implementation of the random indexing method described by Dasgupta et al (2017) in [A neural algorithm for a fundamental computing problem](http://science.sciencemag.org/content/358/6364/793/tab-figures-data). The system takes high-dimensional vectors in input, applies random projections to each vector, and returns a hash for that vector.
+
+**Before you run any analysis, make sure you understand what the algorithm does to the input, referring to the paper.**
 
 ### Description of the data
 
@@ -13,7 +15,7 @@ The cells in each semantic space are normalised co-occurrence frequencies *witho
 
 The directory also contains test pairs from the [MEN similarity dataset](https://staff.fnwi.uva.nl/e.bruni/MEN), both in lemmatised and natural forms.
 
-Finally, it contains a file *generic_pod.csv*, which is a compilation of around 2400 distributional web page signatures, in [PeARS](http://pearsearch.org) format. The web pages span various topics: Harry Potter, Star Wars, the Black Panther film, the Black Panther social rights movement, search engines and various small topics involving architecture.
+Finally, it contains a file *generic_pod.csv*, which is a compilation of around 2400 distributional web page signatures, in [PeARS](http://pearsproject.org) format. The web pages span various topics: Harry Potter, Star Wars, the Black Panther film, the Black Panther social rights movement, search engines and various small topics involving architecture.
 
 ### Running the fruit fly code
 
@@ -44,7 +46,7 @@ To help you with the analysis, you can print a verbose version of the random pro
 This will print out the projection neurons that are most responsible for the activation in the Kenyon layer.
 
 
-### Turning the fly into a search engine
+### Using the fly for document similarity search
 
 You can test the capability of the the fly's algorithm to return web pages that are similar to a given one (and crucially, dimensionality-reduced), by typing:
 
