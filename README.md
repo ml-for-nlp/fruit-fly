@@ -2,6 +2,7 @@
 
 This is an implementation of the random indexing method described by Dasgupta et al (2017) in [A neural algorithm for a fundamental computing problem](http://science.sciencemag.org/content/358/6364/793/tab-figures-data). The code takes a raw count matrix and outputs locality-sensitive binary hashes in place of the original vectors.
 
+**Before you run any analysis, make sure you understand what the algorithm does to the input, referring to the paper.**
 
 ### Description of the data
 
