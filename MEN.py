@@ -1,7 +1,6 @@
 #Evaluate semantic space against MEN dataset
 
 import sys
-import utils
 from scipy import stats
 import numpy as np
 from math import sqrt
@@ -24,7 +23,7 @@ def readMEN(annotation_file):
   return pairs, humans
 
 
-def compute_men_spearman(dm_dict, annotation_file):
+def compute_men_spearman(sims, vocab, annotation_file):
     pairs, humans=readMEN(annotation_file)
     system_actual=[]
     human_actual=[]
@@ -32,8 +31,8 @@ def compute_men_spearman(dm_dict, annotation_file):
     for i in range(len(pairs)):
         human=humans[i]
         a,b=pairs[i]
-        if a in dm_dict and b in dm_dict:
-            cos=utils.cosine_similarity(dm_dict[a],dm_dict[b])
+        if a in vocab and b in vocab:
+            cos=sims[vocab.index(a)][vocab.index(b)]
             system_actual.append(cos)
             human_actual.append(human)
             count+=1

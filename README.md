@@ -1,6 +1,7 @@
 # Implementing the fruit fly's similarity hashing
 
-This is an implementation of the random indexing method described by Dasgupta et al (2017) in [A neural algorithm for a fundamental computing problem](http://science.sciencemag.org/content/358/6364/793/tab-figures-data).
+This is an implementation of the random indexing method described by Dasgupta et al (2017) in [A neural algorithm for a fundamental computing problem](http://science.sciencemag.org/content/358/6364/793/tab-figures-data). The code takes a raw count matrix and outputs locality-sensitive binary hashes in place of the original vectors.
+
 
 ### Description of the data
 
@@ -13,39 +14,34 @@ The cells in each semantic space are normalised co-occurrence frequencies *witho
 
 The directory also contains test pairs from the [MEN similarity dataset](https://staff.fnwi.uva.nl/e.bruni/MEN), both in lemmatised and natural forms.
 
-Finally, it contains a file *generic_pod.csv*, which is a compilation of around 2400 distributional web page signatures, in [PeARS](http://pearsearch.org) format. The web pages span various topics: Harry Potter, Star Wars, the Black Panther film, the Black Panther social rights movement, search engines and various small topics involving architecture.
 
 ### Running the fruit fly code
 
-To run the code, you need to enter the corpus you would like to test on, and the number of Kenyon cells you are going to use for the experiment. For instance, for the BNC space:
+To run the code, you need to enter the corpus you would like to test on, and the number of Kenyon cells you are going to use for the experiment, as well as the projection size and WTA rate (see paper for details). For instance, for the BNC space:
 
-    python3 projection.py bnc 8000 6 5
+    python3 -W ignore run_fly.py --dataset=bnc --kcs=500 --wta=5 --proj_size=10
 
 Or for the Wikipedia space:
 
-    python3 projection.py wiki 4000 4 10
+    python3 -W ignore run_fly.py --dataset=wiki --kcs=500 --wta=5 --proj_size=10
 
 The program returns the Spearman correlation with the MEN similarity data, as calculated a) from the raw frequency space; and b) after running the fly's random projections.
 
 
-### Tuning parameters
+### Initial analysis
 
-First, get a sense for which parameters give best results on the MEN dataset, for both BNC and Wikipedia data. If you know how to code, you can do a random parameter search automatically. If not, just try different values manually and write down what you observe.
+**Tuning parameters:** First, get a sense for which parameters give best results on the MEN dataset, for both BNC and Wikipedia data. If you know how to code, you can do a random parameter search automatically. If not, just try different values manually and write down what you observe.
 
-
-### Analysing the results
-
-Compare results for the BNC and the Wikipedia data. You should see that results on the BNC are much better than on Wikipedia. Why is that?
-
-To help you with the analysis, you can print a verbose version of the random projections with the -v flag. E.g.:
-
-    python3 projection.py bnc 8000 6 1 -v
-
-This will print out the projection neurons that are most responsible for the activation in the Kenyon layer.
+**Preliminary results:** Compare results for the BNC and the Wikipedia data. You should see that results on the BNC are better than on Wikipedia. Why is that? 
 
 
-### Turning the fly into a search engine
+### Expanding the code
 
-You can test the capability of the the fly's algorithm to return web pages that are similar to a given one (and crucially, dimensionality-reduced), by typing:
+We have talked about the problems related to high-dimensional data. The PN layer of the fruit fly is rather large. Can we fix this? The *utils.py* file contains a function *run_PCA* to run PCA over a matrix and reduce its dimensionality to  *k*  principal components. Integrate it in the main fruit fly code to check its effect on the PN layer and the final results. Experiment with different numbers of components.
 
-    python3 searchfly.py data/generic_pod.csv 2000 6 5 https://en.wikipedia.org/wiki/Yahoo!
+
+### Open-ended project
+
+Can you use the fly to hash the content of Web documents? Use the code of the [search engine practical] to get document vectors from Wikipedia, and hash them with the fruit fly. Do you get similar hashes for documents of a given category?
+
+PS: if you want to see how the fruit fly is used in a real search project, check out the [PeARS](https://github.com/PeARSearch/PeARS-fruit-fly/wiki) framework, which is currently integrating fruit fly hashing in its framework.
