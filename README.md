@@ -33,6 +33,8 @@ The program returns the Spearman correlation with the MEN similarity data, as ca
 
 **Tuning parameters:** First, get a sense for which parameters give best results on the MEN dataset, for both BNC and Wikipedia data. If you know how to code, you can do a random parameter search automatically. If not, just try different values manually and write down what you observe.
 
+NB: random projections are... random! So if you run the script several times, you will get different results each time. How should you report your results given this?
+
 **Preliminary results:** Compare results for the BNC and the Wikipedia data. You should see that results on the BNC are better than on Wikipedia. Why is that? 
 
 
@@ -43,6 +45,6 @@ We have talked about the problems related to high-dimensional data. The PN layer
 
 ### Open-ended project
 
-Can you use the fly to hash the content of Web documents? Use the code of the [search engine practical] to get document vectors from Wikipedia, and hash them with the fruit fly. Do you get similar hashes for documents of a given category?
+Can you use the fly to hash the content of Web documents? Use the code of the [search engine practical](https://github.com/ml-for-nlp/build-your-search-engine) to get document vectors from Wikipedia, and hash them with the fruit fly. Do you get similar hashes for documents of a given category?
 
 PS: if you want to see how the fruit fly is used in a real search project, check out the [PeARS](https://github.com/PeARSearch/PeARS-fruit-fly/wiki) framework, which is currently integrating fruit fly hashing in its framework.

@@ -108,7 +108,6 @@ if __name__ == '__main__':
 
     #Init fly
     fly = Fly(pn_size, kc_size, wta, proj_size)
-    fly.print_projections(cols,20)
     sp, count = fly.evaluate(m,vocab,'cosine')
     print ("SPEARMAN BEFORE FLYING:",sp, "(calculated over",count,"items.)")
 
