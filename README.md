@@ -31,9 +31,16 @@ The program returns the Spearman correlation with the MEN similarity data, as ca
 
 ### Initial analysis
 
-**Tuning parameters:** First, get a sense for which parameters give best results on the MEN dataset, for both BNC and Wikipedia data. If you know how to code, you can do a random parameter search automatically. If not, just try different values manually and write down what you observe.
+**Tuning hyperparameters:** First, get a sense for which hyperparameters give best results on the MEN dataset, for both BNC and Wikipedia data. First try different values manually, then write a code snippet to try out different ranges of hyperparameters automatically.
 
-NB: random projections are... random! So if you run the script several times, you will get different results each time. How should you report your results given this?
+NB: random projections are... random! So if you run the script several times, you will get different results each time. How should you run and report your results given this?
+
+**Normalization:** We have talked about the effect of normalization on raw data. Try to suppress normalization in the fly by commenting out the following lines:
+
+    scaler = preprocessing.MinMaxScaler().fit(m)
+    m = scaler.transform(m)
+
+What do you observe?
 
 **Preliminary results:** Compare results for the BNC and the Wikipedia data. You should see that results on the BNC are better than on Wikipedia. Why is that? 
 

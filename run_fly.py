@@ -21,6 +21,7 @@ import numpy as np
 from scipy.sparse import csr_matrix
 from scipy.sparse import hstack, vstack, lil_matrix, coo_matrix
 from sklearn.metrics import pairwise_distances
+from sklearn import preprocessing
 
 class Fly():
 
@@ -100,6 +101,9 @@ if __name__ == '__main__':
     cols = read_cols(column_labels)
     print("VOCAB SIZE:",len(vocab))
     print("DIMENSIONALITY OF RAW SPACE:",len(cols))
+
+    scaler = preprocessing.MinMaxScaler().fit(m)
+    m = scaler.transform(m)
 
     pn_size = m.shape[1]
     print("SIZES PN LAYER:",pn_size,"KC LAYER:",kc_size)
